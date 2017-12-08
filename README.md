@@ -4,14 +4,13 @@
 
 Component Warehouse is based on storybook.
 This is a platform that lets you practice building React components.
-### [storybook](https://storybook.js.org/)
 
 ## Getting Started
 
 #### before you run this project, you need install some tools
 
-- nodejs  [https://nodejs.org/en/](https://nodejs.org/en/)
-- yarn
+1. nodejs  [https://nodejs.org/en/](https://nodejs.org/en/)
+2. yarn
 ```
 npm install -g yarn
 ```
