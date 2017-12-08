@@ -1,2 +1,2 @@
-export * from './ButtonComponent';
+export * from './Button';
 export * from './Input';
