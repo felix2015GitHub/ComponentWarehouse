@@ -10,7 +10,7 @@ const ButtonComponent = (props) => {
     );
 }
 
-export default ButtonComponent;
+export { ButtonComponent };
 
 ButtonComponent.defaultProps = {
     cssName: 'default',

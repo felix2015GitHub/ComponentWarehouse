@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
 import { Button, Welcome } from '@storybook/react/demo';
-import Button2 from '../components/button';
+import { ButtonComponent, Input } from '../components/common';
 
 storiesOf('Welcome', module)
   .add('to storybook', () => (
@@ -21,5 +21,8 @@ storiesOf('Button', module)
 
 storiesOf('Compnents', module)
   .add('Button', () => (
-    <Button2 cssName={'default'} onPress={action('clicked')} disabled={false}>OK</Button2>
+    <ButtonComponent cssName={'default'} onPress={action('clicked')} disabled={false}>OK</ButtonComponent>
+  ))
+  .add('Input', () => (
+    <Input cssName={'default'} disabled={false} value={''} placeholder={'text input'} onChangeText={action('changed')} />
   ))
