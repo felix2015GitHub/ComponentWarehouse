@@ -29,12 +29,13 @@ class Page extends Component {
       const { count, text } = this.props;
       return (
           <div>
-              <div>Button Click</div>
+              <div><h2>Button Click</h2></div>
               <div>Count: {count}</div>
               <Button cssName={'default'} onPress={() => this.handleAddClick()} disabled={false}>Add</Button>
               <Button cssName={'default'} onPress={() => this.handleReduceClick()} disabled={false}>Reduce</Button>
-              <div>Handle Text Change</div>
-              <div>Input: {text}</div>
+              <hr />
+              <div><h2>Handle Text Change</h2></div>
+              <div>Text: {text}</div>
               <input type="text" value={text} onChange={(event) => this.handleInputChange(event)}></input>
           </div>
       );
