@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from '../components/common';
+import { Button, Input } from '../components/common';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as sampleActions from '../actions';
@@ -26,7 +26,7 @@ class Page extends Component {
   }
 
   render() {
-      const { count, text } = this.props;
+      const { count, text, actions } = this.props;
       return (
           <div>
               <div><h2>Button Click</h2></div>
@@ -36,7 +36,13 @@ class Page extends Component {
               <hr />
               <div><h2>Handle Text Change</h2></div>
               <div>Text: {text}</div>
-              <input type="text" value={text} onChange={(event) => this.handleInputChange(event)}></input>
+              <Input
+                  cssName={'default'}
+                  placeholder={'Input Field'}
+                  value={text}
+                  onChangeText={(e) => this.handleInputChange(e)}
+                  disabled={false}
+              />
           </div>
       );
   }
