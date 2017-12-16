@@ -1,1 +1,1 @@
-export * from './buttonAction';
+export * from './sampleAction';

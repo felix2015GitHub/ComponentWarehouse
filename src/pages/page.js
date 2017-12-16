@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button } from '../components/common';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as buttonActions from '../actions';
+import * as sampleActions from '../actions';
 
 class Page extends Component {
 
@@ -20,13 +20,22 @@ class Page extends Component {
       actions.buttonReduce();
   }
 
+  handleInputChange(event) {
+      const { actions } = this.props;
+      actions.stringUpdate({ prop: 'text', value: event.target.value });
+  }
+
   render() {
-      const { count } = this.props;
+      const { count, text } = this.props;
       return (
           <div>
+              <div>Button Click</div>
               <div>Count: {count}</div>
               <Button cssName={'default'} onPress={() => this.handleAddClick()} disabled={false}>Add</Button>
               <Button cssName={'default'} onPress={() => this.handleReduceClick()} disabled={false}>Reduce</Button>
+              <div>Handle Text Change</div>
+              <div>Input: {text}</div>
+              <input type="text" value={text} onChange={(event) => this.handleInputChange(event)}></input>
           </div>
       );
   }
@@ -34,13 +43,13 @@ class Page extends Component {
 }
 
 const mapStateToProps = (state)  => {
-    const { count } = state.ButtonReducer;
-    return { count };
+    const { count, text } = state.SampleReducer;
+    return { count, text };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators(buttonActions, dispatch)
+        actions: bindActionCreators(sampleActions, dispatch)
     };
 }
 

@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import ButtonReducer from './buttonReducer';
+import SampleReducer from './sampleReducer';
 
 const reducers = combineReducers({
-	 ButtonReducer,
+	 SampleReducer
 });
 
 export default reducers;
