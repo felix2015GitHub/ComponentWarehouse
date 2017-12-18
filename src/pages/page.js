@@ -41,7 +41,7 @@ class Page extends Component {
                   placeholder={'Input Field'}
                   value={text}
                   onChangeText={(e) => this.handleInputChange(e)}
-                  disabled={false}
+                  disabled={''}
               />
           </div>
       );

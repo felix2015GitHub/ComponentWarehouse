@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Input = (props) => {
-    const { cssName, disabled, value, placeholder, onChangeText } = props;
+    const { cssName, onChangeText, ...rest } = props;
     return (
         <input
+          { ...rest }
           className={cssName}
-          placeholder={placeholder}
           onChange={onChangeText}
-          value={value}
-          disabled={disabled}
         />
     );
 }
@@ -19,11 +17,15 @@ export { Input };
 Input.defaultProps = {
     cssName: 'default',
     placeholder: 'please type some text',
-    disabled: 'false'
+    disabled: '',
+    value: '',
+    onChange: () => {console.log('onChange')}
 }
 
 Input.propTypes = {
     cssName: PropTypes.string,
     placeholder: PropTypes.string,
-    disabled: PropTypes.bool
+    disabled: PropTypes.string,
+    value: PropTypes.string,
+    onChange: PropTypes.func
 }

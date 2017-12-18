@@ -14,10 +14,14 @@ export { Button };
 
 Button.defaultProps = {
     cssName: 'default',
-    disabled: 'false'
+    disabled: 'false',
+    children: '',
+    onPress: () => {console.log('onPress')}
 }
 
 Button.propTypes = {
     cssName: PropTypes.string,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    children: PropTypes.string,
+    onPress: PropTypes.func
 }
