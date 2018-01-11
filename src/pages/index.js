@@ -37,7 +37,7 @@ class Page extends Component {
               <div><h2>Handle Text Change</h2></div>
               <div>Text: {text}</div>
               <Input
-                  cssName={'default'}
+                  className={'default'}
                   placeholder={'Input Field'}
                   value={text}
                   onChangeText={(e) => this.handleInputChange(e)}

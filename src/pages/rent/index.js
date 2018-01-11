@@ -16,7 +16,6 @@ const DEFAULT_CONFIG = {
 const SECTION = ["All", "中正區", "大同區", "中山區", "松山區", "大安區",
                 "萬華區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"];
 const SEARCH_URL = "https://rent.591.com.tw/home/search/rsList";
-const SLACK_URL = "https://hooks.slack.com/services/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";
 
 class Rent extends Component {
 
@@ -26,6 +25,7 @@ class Rent extends Component {
           config: DEFAULT_CONFIG,
           loading: false,
           result: [],
+          slackWebHookURL: "",
           syncToSlack: false
       }
   }
@@ -39,7 +39,7 @@ class Rent extends Component {
       })
       this.setState({result: temp});
       // console.log(this.state.syncToSlack);
-      if(this.state.syncToSlack) {
+      if(this.state.slackWebHookURL !== "") {
           this.postToSlack();
       }
   }
@@ -68,7 +68,7 @@ class Rent extends Component {
   postToSlack() {
       let postData = this.getPostData();
       axios({
-          url: SLACK_URL,
+          url: this.state.slackWebHookURL,
           method: 'post',
           header: {
               'Content-Type': 'application/json'
@@ -80,6 +80,7 @@ class Rent extends Component {
       })
       .catch(function (error) {
           console.log(error);
+          alert("輸出至Slack失敗，請確認網路連線或是Webhook URL是否正確。");
       });
   }
 
@@ -100,13 +101,8 @@ class Rent extends Component {
       });
   }
 
-  handleCheckboxClick(e) {
-      const { checked } = e.target;
-      this.setState({syncToSlack: checked ? true : false});
-  }
-
   render() {
-      const { loading, result, syncToSlack } = this.state;
+      const { loading, result, slackWebHookURL } = this.state;
       const { section, rentprice, area, keywords } = DEFAULT_CONFIG;
       return (
           <div>
@@ -123,12 +119,14 @@ class Rent extends Component {
               <div><span>其他 : </span><span>更新時間1小時內</span></div>
               <br />
               <div>
-                <Checkbox
-                    id="sync"
-                    defaultChecked={syncToSlack}
-                    onChange={(e) => this.handleCheckboxClick(e)}
+                <span>發送結果至Slack </span>
+                <Input
+                    className={'default'}
+                    style={{width: 200}}
+                    placeholder={'Type Slack Webhook URL'}
+                    value={slackWebHookURL}
+                    onChangeText={(e) => this.setState({slackWebHookURL: e.target.value})}
                 />
-                <span >發送結果至Slack</span>
               </div>
               <Button className={'default'} onClick={() => this.handleSearchClick()} disabled={loading}>搜尋</Button>
               <hr />

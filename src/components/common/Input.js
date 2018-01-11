@@ -2,11 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Input = (props) => {
-    const { cssName, onChangeText, ...rest } = props;
+    const { onChangeText, ...rest } = props;
     return (
         <input
           { ...rest }
-          className={cssName}
           onChange={onChangeText}
         />
     );
@@ -15,7 +14,7 @@ const Input = (props) => {
 export { Input };
 
 Input.defaultProps = {
-    cssName: 'default',
+    className: 'default',
     placeholder: 'please type some text',
     disabled: '',
     value: '',
@@ -23,7 +22,7 @@ Input.defaultProps = {
 }
 
 Input.propTypes = {
-    cssName: PropTypes.string,
+    className: PropTypes.string,
     placeholder: PropTypes.string,
     disabled: PropTypes.string,
     value: PropTypes.string,

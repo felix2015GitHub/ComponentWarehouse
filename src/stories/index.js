@@ -23,7 +23,7 @@ storiesOf('Compnents', module)
       <Button className={'default'} onClick={action('clicked')} disabled={false}>OK</Button>
     ))
     .add('Input', () => (
-      <Input cssName={'default'} disabled={false} value={''} placeholder={'text input'} onChangeText={action('changed')} />
+      <Input className={'default'} disabled={false} value={''} placeholder={'text input'} onChangeText={action('changed')} />
     ))
     .add('Radio', () => (
       <RadioGroup name="test-radio">
