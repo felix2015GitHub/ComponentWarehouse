@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button, Input } from '../../components/common';
+import { Button, Input, Checkbox } from '../../components/common';
 
 const DEFAULT_CONFIG = {
     is_new_list: 1,
@@ -26,6 +26,7 @@ class Rent extends Component {
           config: DEFAULT_CONFIG,
           loading: false,
           result: [],
+          syncToSlack: false
       }
   }
 
@@ -37,17 +38,42 @@ class Rent extends Component {
           return ((d - item.refreshtime*1000) / (60*1000)) < 60;
       })
       this.setState({result: temp});
-      // this.postToSlack();
+      // console.log(this.state.syncToSlack);
+      if(this.state.syncToSlack) {
+          this.postToSlack();
+      }
+  }
+
+  getPostData() {
+      const { result } = this.state;
+      let obj = [];
+
+      result.map((item, i) => {
+          obj.push({
+              "color": "#36a64f",
+              "title": item.address_img_title,
+              "title_link": `https://rent.591.com.tw/rent-detail-${item.houseid}.html`,
+              "fields": [
+                  {"value": `${item.region_name} ${item.section_name}`},
+                  {"value": `${item.floorInfo} ${item.kind_name}`},
+                  {"value": `$ ${item.price}`}
+              ],
+              "image_url": item.cover
+          });
+      });
+
+      return { attachments: obj };
   }
 
   postToSlack() {
+      let postData = this.getPostData();
       axios({
           url: SLACK_URL,
           method: 'post',
           header: {
               'Content-Type': 'application/json'
           },
-          data: JSON.stringify({"text": "測試中"})
+          data: JSON.stringify(postData)
       })
       .then(function (response) {
           console.log(response);
@@ -74,8 +100,13 @@ class Rent extends Component {
       });
   }
 
+  handleCheckboxClick(e) {
+      const { checked } = e.target;
+      this.setState({syncToSlack: checked ? true : false});
+  }
+
   render() {
-      const { loading, result } = this.state;
+      const { loading, result, syncToSlack } = this.state;
       const { section, rentprice, area, keywords } = DEFAULT_CONFIG;
       return (
           <div>
@@ -91,7 +122,15 @@ class Rent extends Component {
               <div><span>關鍵字 : </span><span>{keywords}</span></div>
               <div><span>其他 : </span><span>更新時間1小時內</span></div>
               <br />
-              <Button className={'default'} onClick={() => this.handleSearchClick()} disabled={loading}>Search</Button>
+              <div>
+                <Checkbox
+                    id="sync"
+                    defaultChecked={syncToSlack}
+                    onChange={(e) => this.handleCheckboxClick(e)}
+                />
+                <span >發送結果至Slack</span>
+              </div>
+              <Button className={'default'} onClick={() => this.handleSearchClick()} disabled={loading}>搜尋</Button>
               <hr />
               <div><h3>{result.length > 0 ? `搜尋結果 共 ${result.length} 筆` : `搜尋結果`}</h3></div>
               <div>
