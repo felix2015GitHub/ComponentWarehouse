@@ -25,7 +25,8 @@
     "eject": "react-scripts eject",
     "storybook": "npm-run-all -p storybook-serve watch-css",
     "storybook-serve": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public -o .out",
+    "deploy-storybook": "storybook-to-ghpages"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.2.17",
