@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Button = (props) => {
-    const { cssName, onPress, disabled, children } = props;
+    const { children, ...otherProps } = props;
     return (
-        <button className={cssName} onClick={onPress} disabled={disabled}>
+        <button {...otherProps}>
             {children}
         </button>
     );
@@ -13,15 +13,15 @@ const Button = (props) => {
 export { Button };
 
 Button.defaultProps = {
-    cssName: 'default',
+    className: 'default',
     disabled: 'false',
     children: '',
-    onPress: () => {console.log('onPress')}
+    onClick: () => {console.log('onPress')}
 }
 
 Button.propTypes = {
-    cssName: PropTypes.string,
+    className: PropTypes.string,
     disabled: PropTypes.bool,
     children: PropTypes.string,
-    onPress: PropTypes.func
+    onClick: PropTypes.func
 }

@@ -13,13 +13,14 @@ import {
 } from '../components/common';
 
 import rootReducer from '../reducers';
-import Page from '../pages/page';
+import Page from '../pages';
+import Rent from '../pages/rent';
 
 const store = createStore(rootReducer, {}, window.devToolsExtension && window.devToolsExtension());
 
 storiesOf('Compnents', module)
     .add('Button', () => (
-      <Button cssName={'default'} onPress={action('clicked')} disabled={false}>OK</Button>
+      <Button className={'default'} onClick={action('clicked')} disabled={false}>OK</Button>
     ))
     .add('Input', () => (
       <Input cssName={'default'} disabled={false} value={''} placeholder={'text input'} onChangeText={action('changed')} />
@@ -38,3 +39,8 @@ storiesOf('React Redux Sample', module)
                                </Provider>
                                      ))
     .add('Sample Page', () => <Page />)
+
+storiesOf('Find Rent', module)
+    .add('Rent', () => (
+      <Rent />
+    ))
