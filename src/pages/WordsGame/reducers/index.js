@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import SampleReducer from './sampleReducer';
+import WordsGameReducer from './WordsGameReducer';
 
 const reducers = combineReducers({
-		SampleReducer
+		WordsGameReducer
 });
 
 export default reducers;

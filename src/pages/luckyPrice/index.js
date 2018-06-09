@@ -34,13 +34,13 @@ class LuckyPrice extends Component {
   }
 
   handleButtonClick() {
-    const self = this;
+    // const self = this;
     const { apiurl } = this.state;
     this.setState({loading: true});
     axios.get(apiurl, {
-      	headers: {
-      	  'Access-Control-Allow-Origin': '*',
-      	}
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        }
       })
       .then(function (resp) {
         console.log(resp);

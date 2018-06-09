@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button, Input, Checkbox } from '../../components/common';
+import { Button, Input } from '../../components/common';
 
 const DEFAULT_CONFIG = {
     is_new_list: 1,
@@ -37,7 +37,7 @@ class Rent extends Component {
       const { data } = result;
       let temp = [];
       let d = new Date();
-      temp = data.data.filter((item, idx) => {
+      temp = data.data.filter(item => {
           return ((d - item.refreshtime*1000) / (60*1000)) < 60;
       })
       this.setState({result: temp});
@@ -51,7 +51,7 @@ class Rent extends Component {
       const { result } = this.state;
       let obj = [];
 
-      result.map((item, i) => {
+      result.map(item => {
           obj.push({
               "color": "#36a64f",
               "title": item.address_img_title,
@@ -148,7 +148,7 @@ class Rent extends Component {
                   result.map((item, idx) => {
                       return (
                           <div key={`result-${idx}`}>
-                            <div><a href={`https://rent.591.com.tw/rent-detail-${item.houseid}.html`} target="_blank">{item.address_img_title}</a></div>
+                            <div><a href={`https://rent.591.com.tw/rent-detail-${item.houseid}.html`} target="_blank" rel='noreferrer noopener'>{item.address_img_title}</a></div>
                             <div><span>{`${item.region_name} ${item.section_name}`}</span></div>
                             <div><span>{`${item.floorInfo} ${item.kind_name}  ${item.area}坪`}</span></div>
                             <div><span>{`$ ${item.price}`}</span></div>

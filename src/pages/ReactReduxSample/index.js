@@ -12,7 +12,7 @@ class Page extends Component {
 
   handleAddClick() {
       const { actions } = this.props;
-  		actions.buttonAdd();
+      actions.buttonAdd();
   }
 
   handleReduceClick() {
@@ -26,7 +26,7 @@ class Page extends Component {
   }
 
   render() {
-      const { count, text, actions } = this.props;
+      const { count, text } = this.props;
       return (
           <div>
               <div><h2>Button Click</h2></div>

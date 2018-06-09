@@ -11,7 +11,7 @@ class Checkbox extends Component {
         };
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFEcomponentWillReceiveProps(nextProps) {
         if ('checked' in nextProps) {
             this.setState({
                 checked: nextProps.checked,
@@ -49,7 +49,7 @@ class Checkbox extends Component {
 
     render() {
         const { checked } = this.state;
-        const { disabled, id } = this.props;
+        const { id } = this.props;
         return (
             <div style={{display: 'inline-block'}}>
                 <input
