@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Input } from '../components/common';
+import { Button, Input } from '../../components/common';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as sampleActions from '../actions';
+import * as sampleActions from './actions';
 
 class Page extends Component {
 
@@ -31,8 +31,8 @@ class Page extends Component {
           <div>
               <div><h2>Button Click</h2></div>
               <div>Count: {count}</div>
-              <Button cssName={'default'} onPress={() => this.handleAddClick()} disabled={false}>Add</Button>
-              <Button cssName={'default'} onPress={() => this.handleReduceClick()} disabled={false}>Reduce</Button>
+              <Button className={'default'} onClick={() => this.handleAddClick()} disabled={false}>Add</Button>
+              <Button className={'default'} onClick={() => this.handleReduceClick()} disabled={false}>Reduce</Button>
               <hr />
               <div><h2>Handle Text Change</h2></div>
               <div>Text: {text}</div>

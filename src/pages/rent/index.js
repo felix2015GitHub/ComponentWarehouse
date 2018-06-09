@@ -8,9 +8,12 @@ const DEFAULT_CONFIG = {
     kind: 0,
     searchtype: 1,
     region: 1,
-    section: "1,2,3,4,5,7",
-    rentprice: "12000,16000",
-    area: "10,16",
+    section: "1,2,3,4,5,7,10,11",
+    rentprice: "10000,16000",
+    area: "8,25",
+    hasimg: 1, //附房屋圖片
+    not_cover: 1, //排除頂樓加蓋
+    role: 1, // 屋主刊登
     keywords: ""
 }
 const SECTION = ["All", "中正區", "大同區", "中山區", "松山區", "大安區",
@@ -88,7 +91,9 @@ class Rent extends Component {
       const self = this;
       const { config } = this.state;
       this.setState({loading: true});
-      axios.get(SEARCH_URL, {
+      fetch(SEARCH_URL, {
+          method: 'get',
+          mode: 'cors',
           params: config
       })
       .then(function (response) {
@@ -103,7 +108,8 @@ class Rent extends Component {
 
   render() {
       const { loading, result, slackWebHookURL } = this.state;
-      const { section, rentprice, area, keywords } = DEFAULT_CONFIG;
+      const { section, rentprice, area, keywords, hasimg, not_cover, role } = DEFAULT_CONFIG;
+
       return (
           <div>
               <div><h2>搜尋條件</h2></div>
@@ -117,6 +123,12 @@ class Rent extends Component {
               <div><span>坪數 : </span><span>{`${area.split(",")[0]} ~ ${area.split(",")[1]}`}</span></div>
               <div><span>關鍵字 : </span><span>{keywords}</span></div>
               <div><span>其他 : </span><span>更新時間1小時內</span></div>
+              <div>
+                  <span>選項 : </span>
+                  <span>{hasimg?"附房屋圖片":""}</span>
+                  <span>{not_cover?"、排除頂樓加蓋":""}</span>
+                  <span>{role?"、屋主刊登":""}</span>
+              </div>
               <br />
               <div>
                 <span>發送結果至Slack </span>
@@ -138,7 +150,7 @@ class Rent extends Component {
                           <div key={`result-${idx}`}>
                             <div><a href={`https://rent.591.com.tw/rent-detail-${item.houseid}.html`} target="_blank">{item.address_img_title}</a></div>
                             <div><span>{`${item.region_name} ${item.section_name}`}</span></div>
-                            <div><span>{`${item.floorInfo} ${item.kind_name}`}</span></div>
+                            <div><span>{`${item.floorInfo} ${item.kind_name}  ${item.area}坪`}</span></div>
                             <div><span>{`$ ${item.price}`}</span></div>
                             <div><img src={item.cover} /></div>
                           </div>

@@ -12,11 +12,12 @@ import {
   RadioGroup
 } from '../components/common';
 
-import rootReducer from '../reducers';
-import Page from '../pages';
+import reactReduxSampleReducer from '../pages/ReactReduxSample/reducers';
+import Page from '../pages/ReactReduxSample';
 import Rent from '../pages/rent';
+import LuckyPrice from '../pages/luckyPrice';
 
-const store = createStore(rootReducer, {}, window.devToolsExtension && window.devToolsExtension());
+const reactReduxSampleStore = createStore(reactReduxSampleReducer, {}, window.devToolsExtension && window.devToolsExtension());
 
 storiesOf('Compnents', module)
     .add('Button', () => (
@@ -34,7 +35,7 @@ storiesOf('Compnents', module)
     ))
 
 storiesOf('React Redux Sample', module)
-    .addDecorator((getStory) => (<Provider store={store}>
+    .addDecorator((getStory) => (<Provider store={reactReduxSampleStore}>
                                         { getStory() }
                                </Provider>
                                      ))
@@ -43,4 +44,9 @@ storiesOf('React Redux Sample', module)
 storiesOf('Find Rent', module)
     .add('Rent', () => (
       <Rent />
+    ))
+
+storiesOf('Lucky Price', module)
+    .add('Lucky Price', () => (
+      <LuckyPrice />
     ))
