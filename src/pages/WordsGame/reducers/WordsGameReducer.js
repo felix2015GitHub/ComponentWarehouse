@@ -1,8 +1,9 @@
-import {
+import * as wordsGameAction from '../actions/wordsGameAction';
+const {
     GAME_STATE,
     QUESTION_NUM,
     WORD_NUM,
-} from '../actions/types';
+} = wordsGameAction;
 
 const INIT_STATE = {
     start: false,

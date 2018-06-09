@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CountdownTimer from './CountdownTimer';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as wordsGameActions from './actions';
+import * as wordsGameActions from './actions/wordsGameAction';
 import { Button } from '../../components/common';
 import { questionList } from './questionList';
 import { bopomofo } from './bopomofo';
@@ -16,11 +16,6 @@ class WrodsGame extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            start: false,
-            questionNum: 0,
-            wordNum: 0,
-        };
     }
 
     componentDidMount() {
@@ -48,19 +43,16 @@ class WrodsGame extends Component {
     genQuestion() {
         let len = questionList.length;
         let questionNum = Math.floor(Math.random()*len-1)+1;
-        const { actions } = this.props;
-        actions.questionNum({num: questionNum});
+        this.props.actions.questionNum({num: questionNum});
     }
 
     handleStartClick = () => {
-        const { actions } = this.props;
-        actions.gameState();
-        actions.wordNum();
+        this.props.actions.gameState();
+        this.props.actions.wordNum();
     }
 
     handleFinish = () => {
-        const { actions } = this.props;
-        actions.gameState();
+        this.props.actions.gameState();
     }
 
     render() {
@@ -92,12 +84,12 @@ class WrodsGame extends Component {
 
 }
 
-const mapStateToProps = (state)  => {
-    const { start, questionNum, wordNum } = state.WordsGameReducer;
+const mapStateToProps = ({WordsGameReducer})  => {
+    const { start, questionNum, wordNum } = WordsGameReducer;
     return { start, questionNum, wordNum };
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
     return {
         actions: bindActionCreators(wordsGameActions, dispatch)
     };

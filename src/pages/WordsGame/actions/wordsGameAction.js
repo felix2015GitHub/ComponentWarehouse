@@ -1,8 +1,11 @@
-import {
-    GAME_STATE,
-    QUESTION_NUM,
-    WORD_NUM,
-} from './types';
+// import {
+//     GAME_STATE,
+//     QUESTION_NUM,
+//     WORD_NUM,
+// } from './types';
+export const GAME_STATE = 'GAME_STATE';
+export const QUESTION_NUM = 'QUESTION_NUM';
+export const WORD_NUM = 'WORD_NUM';
 
 export const gameState = () => {
     return {
